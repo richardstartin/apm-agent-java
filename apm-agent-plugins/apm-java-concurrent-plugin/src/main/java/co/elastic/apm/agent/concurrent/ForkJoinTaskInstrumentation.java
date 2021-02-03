@@ -35,7 +35,6 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.concurrent.ForkJoinTask;
 
-import static net.bytebuddy.matcher.ElementMatchers.is;
 import static net.bytebuddy.matcher.ElementMatchers.named;
 import static net.bytebuddy.matcher.ElementMatchers.returns;
 
@@ -45,12 +44,12 @@ import static net.bytebuddy.matcher.ElementMatchers.returns;
 public class ForkJoinTaskInstrumentation extends TracerAwareInstrumentation {
     @Override
     public ElementMatcher<? super TypeDescription> getTypeMatcher() {
-        return is(ForkJoinTask.class);
+        return named("java.util.concurrent.ForkJoinTask");
     }
 
     @Override
     public ElementMatcher<? super MethodDescription> getMethodMatcher() {
-        return named("fork").and(returns(ForkJoinTask.class));
+        return named("fork").and(returns(named("java.util.concurrent.ForkJoinTask")));
     }
 
     @Override

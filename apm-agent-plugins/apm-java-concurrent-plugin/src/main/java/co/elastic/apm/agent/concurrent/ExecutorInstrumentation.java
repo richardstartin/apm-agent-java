@@ -232,9 +232,9 @@ public abstract class ExecutorInstrumentation extends TracerAwareInstrumentation
          */
         @Override
         public ElementMatcher<? super MethodDescription> getMethodMatcher() {
-            return named("execute").and(returns(void.class)).and(takesArguments(ForkJoinTask.class))
-                .or(named("submit").and(returns(ForkJoinTask.class)).and(takesArguments(ForkJoinTask.class)))
-                .or(named("invoke").and(returns(Object.class)).and(takesArguments(ForkJoinTask.class)));
+            return named("execute").and(returns(void.class)).and(takesArgument(0, named("java.util.concurrent.ForkJoinTask")))
+                .or(named("submit").and(returns(named("java.util.concurrent.ForkJoinTask"))).and(takesArgument(0, named("java.util.concurrent.ForkJoinTask"))))
+                .or(named("invoke").and(returns(Object.class)).and(takesArgument(0, named("java.util.concurrent.ForkJoinTask"))));
         }
 
         @Nullable

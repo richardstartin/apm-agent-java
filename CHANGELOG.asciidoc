@@ -16,6 +16,7 @@ endif::[]
 
 [float]
 ===== Bug fixes
+* Avoid loading the ForkJoinTask class during startup, which may prevent other agents from intercepting its loading
 ////
 
 === Unreleased

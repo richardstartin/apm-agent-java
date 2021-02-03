@@ -56,7 +56,7 @@ public class RunnableCallableForkJoinTaskInstrumentation extends TracerAwareInst
         return hasSuperType(
             is(Runnable.class)
             .or(is(Callable.class))
-            .or(is(ForkJoinTask.class))
+            .or(named("java.util.concurrent.ForkJoinTask"))
         );
     }
 
